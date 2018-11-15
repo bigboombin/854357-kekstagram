@@ -1,7 +1,8 @@
 # Личный проект «Кекстаграм» [![Build status][travis-image]][travis-url]
 
 * Студент: [Илья Титаев](https://up.htmlacademy.ru/javascript/16/user/854357).
-* Наставник: `Неизвестно`.
+* Наставник: [Дмитрий Донецкий
+](https://htmlacademy.ru/profile/id497669).
 
 ---
 
