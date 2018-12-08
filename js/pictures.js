@@ -120,13 +120,22 @@ var closeUploadFile = function () {
   var uploadFile = document.querySelector('#upload-file');
   var imgUploadOverlay = document.querySelector('.img-upload__overlay');
   var uploadCancel = document.querySelector('#upload-cancel');
+  var hashtagsInput = document.querySelector('.text__hashtags');
+  var comments = document.querySelector('.text__description');
   uploadFile.addEventListener('change', function () {
     imgUploadOverlay.classList.remove('hidden');
-    document.addEventListener('keydown', function (evt) {
+    var imgUploadOverlayEscHidd = function (evt) {
       if (evt.keyCode === ESC) {
         imgUploadOverlay.classList.add('hidden');
         uploadFile.value = '';
       }
+    };
+    document.addEventListener('keydown', imgUploadOverlayEscHidd);
+    hashtagsInput.addEventListener('focus', function () {
+      document.removeEventListener('keydown', imgUploadOverlayEscHidd);
+    });
+    comments.addEventListener('focus', function () {
+      document.removeEventListener('keydown', imgUploadOverlayEscHidd);
     });
   });
   uploadCancel.addEventListener('click', function () {
