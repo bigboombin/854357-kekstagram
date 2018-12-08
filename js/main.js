@@ -1,4 +1,7 @@
 'use strict';
+var MAX_HASHTAGS = 5;
+var MAX_HASHTAG = 20;
+var MAX_COMMENT = 140;
 var formValidity = function () {
   var hashtagsInput = document.querySelector('.text__hashtags');
   var comments = document.querySelector('.text__description');
@@ -6,7 +9,7 @@ var formValidity = function () {
     var hashtags = hashtagsInput.value.split(' ');
     var hashtag;
     var hashtagLetters;
-    if (hashtags.length > 5) {
+    if (hashtags.length > MAX_HASHTAGS) {
       hashtagsInput.setCustomValidity('нельзя указать больше пяти хэш-тегов');
     }
     for (var i = 0; i < hashtags.length; i++) {
@@ -14,7 +17,7 @@ var formValidity = function () {
       hashtagLetters = hashtag.split('');
       if (hashtagLetters[0] !== '#' && hashtagLetters.length !== 0) {
         hashtagsInput.setCustomValidity('хэш-тег начинается с символа # (решётка)');
-      } else if (hashtagLetters.length > 20) {
+      } else if (hashtagLetters.length > MAX_HASHTAG) {
         hashtagsInput.setCustomValidity('максимальная длина одного хэш-тега 20 символов, включая решётку');
       } else if (hashtagLetters.length === 1) {
         hashtagsInput.setCustomValidity('хеш-тег не может состоять только из одной решётки');
@@ -30,7 +33,7 @@ var formValidity = function () {
   });
   comments.addEventListener('change', function () {
     var commentsLetter = comments.value.split(' ');
-    if (commentsLetter.length > 140) {
+    if (commentsLetter.length > MAX_COMMENT) {
       comments.setCustomValidity('длина комментария не может составлять больше 140 символов');
     }
   });
