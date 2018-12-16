@@ -1,8 +1,8 @@
 'use strict';
-var MAX_HASHTAGS = 5;
-var MAX_HASHTAG = 20;
-var MAX_COMMENT = 140;
-var formValidity = function () {
+(function () {
+  var MAX_HASHTAGS = 5;
+  var MAX_HASHTAG = 20;
+  var MAX_COMMENT = 140;
   var hashtagsInput = document.querySelector('.text__hashtags');
   var comments = document.querySelector('.text__description');
   hashtagsInput.addEventListener('change', function () {
@@ -37,5 +37,4 @@ var formValidity = function () {
       comments.setCustomValidity('длина комментария не может составлять больше 140 символов');
     }
   });
-};
-formValidity();
+})();
