@@ -6,6 +6,9 @@
   var hashtagsInput = document.querySelector('.text__hashtags');
   var comments = document.querySelector('.text__description');
   hashtagsInput.addEventListener('change', function () {
+    var hashtagsInputStr = hashtagsInput.value;
+    var newHashtags = hashtagsInputStr.toLowerCase();
+    hashtagsInput.value = newHashtags;
     var hashtags = hashtagsInput.value.split(' ');
     var hashtag;
     var hashtagLetters;

@@ -27,7 +27,7 @@
         effectLevelDepth.style.width = SLIDER_WIDTH + 'px';
       }
       var effectLevel = effectLevelPinPosition / SLIDER_WIDTH;
-      effectLevelValue.value = String(effectLevel * PERCENT);
+      effectLevelValue.setAttribute('value', String(effectLevel * PERCENT));
       if (imgUploadPreview.classList.contains('effects__preview--chrome')) {
         imgUploadPreview.style.filter = 'grayscale(' + effectLevel + ')';
       } else if (imgUploadPreview.classList.contains('effects__preview--sepia')) {
