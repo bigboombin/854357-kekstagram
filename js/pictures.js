@@ -64,6 +64,23 @@
 
     var main = document.querySelector('main');
     main.appendChild(fragmentBigPicture);
+    var commentCreate = function (comments) {
+      var socialComments = document.querySelector('.social__comments');
+      var socialComment = document.querySelector('.social__comment');
+      var socialCommentsAll = document.querySelectorAll('.social__comment');
+      for (var i = 0; i < socialCommentsAll.length; i++) {
+        socialCommentsAll[i].remove();
+      }
+      for (var k = 0; k < comments.length; k++) {
+        var socialCommentClone = socialComment.cloneNode(true);
+        socialComments.appendChild(socialCommentClone);
+        socialCommentClone.querySelector('.social__picture').src = comments[k].avatar;
+        socialCommentClone.querySelector('.social__text').textContent = comments[k].message;
+      }
+    };
+    commentCreate(photoDescription.comments.slice(0, 5));
+
+
   };
   var openBigPhoto = function (photosDescription) {
     var allPhotos = document.querySelectorAll('.picture__img');
@@ -86,13 +103,6 @@
     }
   };
 
-  var hideCommentsLoader = function () {
-    var socialCommentCount = document.querySelector('.social__comment-count');
-    var commentLoader = document.querySelector('.comments-loader');
-    socialCommentCount.classList.add('visually-hidden');
-    commentLoader.classList.add('visually-hidden');
-  };
-  hideCommentsLoader();
   var onLoad = function (photosDescription) {
     var imgFilters = document.querySelector('.img-filters');
     imgFilters.classList.remove('img-filters--inactive');
