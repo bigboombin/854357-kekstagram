@@ -25,6 +25,7 @@
     xhr.send();
   };
 
+
   var upload = function (data, onLoad, onError) {
     var URL = 'https://js.dump.academy/kekstagram';
     var xhr = new XMLHttpRequest();

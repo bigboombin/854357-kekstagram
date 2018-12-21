@@ -30,6 +30,8 @@
   var closeUploadFile = function () {
     uploadFile.addEventListener('change', function () {
       imgUploadOverlay.classList.remove('hidden');
+      var slider = document.querySelector('.img-upload__effect-level');
+      slider.style.display = 'none';
       var imgUploadOverlayEscHidd = function (evt) {
         if (evt.keyCode === ESC) {
           imgUploadOverlay.classList.add('hidden');
@@ -77,6 +79,7 @@
           imgUploadPreview.style.filter = 'brightness(3)';
           slider.style.display = '';
         } else if (imgUploadPreview.classList.contains('effects__preview--none')) {
+          imgUploadPreview.style.filter = '';
           effectLevelDepth.width = '0px';
           slider.style.display = 'none';
         }
