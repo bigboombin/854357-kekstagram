@@ -1,15 +1,7 @@
 'use strict';
 (function () {
-  var LAST_IMAGE = 6;
-  var FIRST_IMAGE = 1;
-  var MAX_COMMENTS = 2;
   var ESC = 27;
   var ENTER = 13;
-  var randomInteger = function (min, max) {
-    var rand = min - 0.5 + Math.random() * (max - min + 1);
-    rand = Math.round(rand);
-    return rand;
-  };
 
 
   var addAllPhotos = function (photosDescription) {
@@ -24,8 +16,8 @@
     for (var i = 0; i < photosDescription.length; i++) {
       var element = template.cloneNode(true);
       element.querySelector('img').src = photosDescription[i].url;
-      element.querySelector('.picture__likes').TextContent = photosDescription[i].likes;
-      element.querySelector('.picture__comments').TextContent = photosDescription[i].comments;
+      element.querySelector('.picture__likes').textContent = String(photosDescription[i].likes);
+      element.querySelector('.picture__comments').textContent = String(photosDescription[i].comments.length);
       fragmentPictures.appendChild(element);
     }
     pictures.appendChild(fragmentPictures);
@@ -50,17 +42,6 @@
     buttonClose.addEventListener('click', function () {
       bigPicture.classList.add('hidden');
     });
-    var imageList = bigPicture.querySelectorAll('.social__picture');
-    var imageD = bigPicture.querySelectorAll('.social__text');
-    if (photoDescription.comments.length === MAX_COMMENTS) {
-      for (var j = 0; j < photoDescription.comments.length; j++) {
-        imageList[j].src = 'img/avatar-' + randomInteger(FIRST_IMAGE, LAST_IMAGE) + '.svg';
-        imageD[j].TextContent = photoDescription.comments[j];
-      }
-    } else {
-      imageList[0].src = 'img/avatar-' + randomInteger(FIRST_IMAGE, LAST_IMAGE) + '.svg';
-      imageD[0].TextContent = photoDescription.comments[0];
-    }
 
     var main = document.querySelector('main');
     main.appendChild(fragmentBigPicture);
@@ -84,12 +65,12 @@
   };
   var openBigPhoto = function (photosDescription) {
     var allPhotos = document.querySelectorAll('.picture__img');
-    var createBigPhoto = function (photoDescription) {
+    var onPhotoClick = function (photoDescription) {
       return function () {
         addBigPicture(photoDescription);
       };
     };
-    var createBigPhotoEnter = function (photoDescription) {
+    var onPhotoEnter = function (photoDescription) {
       return function (evt) {
         if (evt.keyCode === ENTER) {
           addBigPicture(photoDescription);
@@ -97,9 +78,9 @@
       };
     };
     for (var i = 0; i < photosDescription.length; i++) {
-      allPhotos[i].addEventListener('click', createBigPhoto(photosDescription[i]));
+      allPhotos[i].addEventListener('click', onPhotoClick(photosDescription[i]));
       allPhotos[i].setAttribute('tabindex', i);
-      allPhotos[i].addEventListener('keydown', createBigPhotoEnter(photosDescription[i]));
+      allPhotos[i].addEventListener('keydown', onPhotoEnter(photosDescription[i]));
     }
   };
 
@@ -114,7 +95,7 @@
     var photoDescription = photosDescription;
 
 
-    var filterPopular = function () {
+    var onFilterPopularClick = function () {
       filterNewButton.classList.remove('img-filters__button--active');
       filterDiscussedButton.classList.remove('img-filters__button--active');
       filterPopularButton.classList.remove('img-filters__button--active');
@@ -125,7 +106,7 @@
       openBigPhoto(photoDescription);
     };
 
-    var filterNew = function () {
+    var onFilterNewClick = function () {
       filterNewButton.classList.remove('img-filters__button--active');
       filterDiscussedButton.classList.remove('img-filters__button--active');
       filterPopularButton.classList.remove('img-filters__button--active');
@@ -135,7 +116,7 @@
       openBigPhoto(photoDescriptionNew);
     };
 
-    var filterDiscussed = function () {
+    var onFilterDiscussedClick = function () {
       filterNewButton.classList.remove('img-filters__button--active');
       filterDiscussedButton.classList.remove('img-filters__button--active');
       filterPopularButton.classList.remove('img-filters__button--active');
@@ -155,9 +136,9 @@
     };
 
 
-    filterPopularButton.addEventListener('click', filterPopular);
-    filterNewButton.addEventListener('click', filterNew);
-    filterDiscussedButton.addEventListener('click', filterDiscussed);
+    filterPopularButton.addEventListener('click', onFilterPopularClick);
+    filterNewButton.addEventListener('click', onFilterNewClick);
+    filterDiscussedButton.addEventListener('click', onFilterDiscussedClick);
 
     addAllPhotos(photoDescription);
     openBigPhoto(photoDescription);

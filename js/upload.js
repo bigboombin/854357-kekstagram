@@ -32,18 +32,18 @@
       imgUploadOverlay.classList.remove('hidden');
       var slider = document.querySelector('.img-upload__effect-level');
       slider.style.display = 'none';
-      var imgUploadOverlayEscHidd = function (evt) {
+      var onUploadOverlayKeydown = function (evt) {
         if (evt.keyCode === ESC) {
           imgUploadOverlay.classList.add('hidden');
           reset();
         }
       };
-      document.addEventListener('keydown', imgUploadOverlayEscHidd);
+      document.addEventListener('keydown', onUploadOverlayKeydown);
       hashtagsInput.addEventListener('focus', function () {
-        document.removeEventListener('keydown', imgUploadOverlayEscHidd);
+        document.removeEventListener('keydown', onUploadOverlayKeydown);
       });
       comments.addEventListener('focus', function () {
-        document.removeEventListener('keydown', imgUploadOverlayEscHidd);
+        document.removeEventListener('keydown', onUploadOverlayKeydown);
       });
     });
     uploadCancel.addEventListener('click', function () {
@@ -56,7 +56,7 @@
   var changeEffect = function () {
     var slider = document.querySelector('.img-upload__effect-level');
     var currentEffect;
-    var createEffectHandler = function (effect) {
+    var onEffectRadioInput = function (effect) {
       return function () {
         imgUploadPreview.classList.add('effects__preview--' + effect);
         if (currentEffect) {
@@ -88,7 +88,7 @@
     for (var k = 0; k < EFFECTS.length; k++) {
       var effectRadio = document.querySelector('#effect-' + EFFECTS[k]);
       var effect = EFFECTS[k];
-      effectRadio.addEventListener('input', createEffectHandler(effect));
+      effectRadio.addEventListener('input', onEffectRadioInput(effect));
     }
   };
   changeEffect();
