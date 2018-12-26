@@ -90,7 +90,7 @@
     };
     for (var i = 0; i < photosDescription.length; i++) {
       allPhotos[i].addEventListener('click', onPhotoClick(photosDescription[i]));
-      allPhotos[i].setAttribute('tabindex', i);
+      allPhotos[i].setAttribute('tabindex', 0);
       allPhotos[i].addEventListener('keydown', onPhotoEnter(photosDescription[i]));
     }
   };
