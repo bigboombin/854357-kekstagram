@@ -4,7 +4,6 @@
   var EFFECTS = ['none', 'chrome', 'sepia', 'marvin', 'phobos', 'heat'];
   var PERCENT = 100;
   var MAX_EFFECT = 100;
-  var ENTER = 13;
   var MIN_EFFECT = 25;
   var uploadFile = document.querySelector('#upload-file');
   var imgUploadOverlay = document.querySelector('.img-upload__overlay');
@@ -20,6 +19,7 @@
   var scaleControlBigger = document.querySelector('.scale__control--bigger');
   var slider = document.querySelector('.img-upload__effect-level');
   var scaleControlValue = document.querySelector('.scale__control--value');
+  var inputNoneEffect = document.querySelector('#effect-none');
 
   var changeEffectSlider = function () {
     slider.style.display = '';
@@ -29,8 +29,7 @@
   };
 
   var reset = function () {
-    var input = document.querySelector('#effect-heat');
-    input.setAttribute('checked', true);
+    inputNoneEffect.setAttribute('checked', true);
     imgUploadOverlay.classList.add('hidden');
     imgUploadPreview.classList.value = '';
     imgUploadPreview.style = '';
@@ -43,6 +42,7 @@
   };
 
   var closeUploadFile = function () {
+    inputNoneEffect.setAttribute('checked', true);
     var scaleControl = MAX_EFFECT;
     scaleControlValue.value = scaleControl + '%';
     imgUploadPreview.style = 'transform: scale(' + scaleControl / PERCENT + ')';
@@ -63,16 +63,6 @@
     };
     scaleControlSmaller.addEventListener('click', onScaleControlSmallerClick);
     scaleControlBigger.addEventListener('click', onScaleControlBiggerClick);
-    scaleControlSmaller.addEventListener('keydown', function (evt) {
-      if (evt.keyCode === ENTER) {
-        onScaleControlSmallerClick();
-      }
-    });
-    scaleControlBigger.addEventListener('keydown', function (evt) {
-      if (evt.keyCode === ENTER) {
-        onScaleControlBiggerClick();
-      }
-    });
 
 
     uploadFile.addEventListener('change', function () {
