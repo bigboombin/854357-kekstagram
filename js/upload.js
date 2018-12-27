@@ -112,10 +112,10 @@
     var currentEffect;
     var onEffectRadioInput = function (effect) {
       return function () {
-        imgUploadPreview.classList.add('effects__preview--' + effect);
         if (currentEffect) {
           imgUploadPreview.classList.remove(currentEffect);
         }
+        imgUploadPreview.classList.add('effects__preview--' + effect);
         currentEffect = 'effects__preview--' + effect;
         if (imgUploadPreview.classList.contains('effects__preview--chrome')) {
           imgUploadPreview.style.filter = 'grayscale(1)';
