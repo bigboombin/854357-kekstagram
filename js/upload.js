@@ -157,14 +157,18 @@
     successButton.addEventListener('click', function () {
       sectionSuccess.remove();
     });
-    document.addEventListener('keydown', function (evt) {
+    var onDocumentKeydown = function (evt) {
       if (evt.keyCode === ESC) {
         sectionSuccess.remove();
       }
-    });
-    document.addEventListener('click', function () {
+      document.removeEventListener('keydown', onDocumentKeydown);
+    };
+    var onDocumentClick = function () {
       sectionSuccess.remove();
-    });
+      document.removeEventListener('keydown', onDocumentClick);
+    };
+    document.addEventListener('keydown', onDocumentKeydown);
+    document.addEventListener('click', onDocumentClick);
   };
   var onError = function () {
     resetForm();
@@ -182,14 +186,18 @@
     anotherFileButton.addEventListener('click', function () {
       sectionError.remove();
     });
-    document.addEventListener('keydown', function (evt) {
+    var onDocumentKeydown = function (evt) {
       if (evt.keyCode === ESC) {
         sectionError.remove();
       }
-    });
-    document.addEventListener('click', function () {
+      document.removeEventListener('keydown', onDocumentKeydown);
+    };
+    var onDocumentClick = function () {
       sectionError.remove();
-    });
+      document.removeEventListener('keydown', onDocumentClick);
+    };
+    document.addEventListener('keydown', onDocumentKeydown);
+    document.addEventListener('click', onDocumentClick);
   };
   form.addEventListener('submit', function (evt) {
     window.backend.upload(new FormData(form), onLoad, onError);

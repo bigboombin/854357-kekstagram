@@ -45,11 +45,14 @@
     bigPicture.querySelector('.likes-count').textContent = photoDescription.likes;
     bigPicture.querySelector('.comments-count').textContent = photoDescription.comments.length;
     bigPicture.querySelector('.social__caption').textContent = photoDescription.description;
-    document.addEventListener('keydown', function (evt) {
+    var onDocumentKeydown = function (evt) {
       if (evt.keyCode === ESC) {
         bigPicture.classList.add('hidden');
       }
-    });
+      document.removeEventListener('keydown', onDocumentKeydown);
+    };
+    document.addEventListener('keydown', onDocumentKeydown);
+
     buttonClose.addEventListener('click', function () {
       bigPicture.classList.add('hidden');
     });
