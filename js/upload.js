@@ -96,12 +96,12 @@
       imgUploadOverlay.classList.remove('hidden');
       slider.style.display = 'none';
       var onUploadOverlayKeydown = function (evt) {
-        evt.preventDefault();
         if (evt.keyCode === ESC) {
           form.reset();
           imgUploadOverlay.classList.add('hidden');
           resetForm();
         }
+        document.removeEventListener('keydown', onUploadOverlayKeydown);
       };
       document.addEventListener('keydown', onUploadOverlayKeydown);
       hashtagsInput.addEventListener('focus', function () {
