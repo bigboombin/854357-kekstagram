@@ -96,7 +96,9 @@
       imgUploadOverlay.classList.remove('hidden');
       slider.style.display = 'none';
       var onUploadOverlayKeydown = function (evt) {
+        evt.preventDefault();
         if (evt.keyCode === ESC) {
+          form.reset();
           imgUploadOverlay.classList.add('hidden');
           resetForm();
         }
@@ -202,6 +204,7 @@
     });
     var onDocumentKeydown = function (evt) {
       if (evt.keyCode === ESC) {
+        evt.preventDefault();
         sectionError.remove();
       }
       document.removeEventListener('keydown', onDocumentKeydown);
