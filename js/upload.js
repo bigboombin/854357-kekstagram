@@ -98,7 +98,7 @@
       var onUploadOverlayKeydown = function (evt) {
         if (evt.keyCode === ESC) {
           imgUploadOverlay.classList.add('hidden');
-          resetClose();
+          resetForm();
         }
       };
       document.addEventListener('keydown', onUploadOverlayKeydown);
