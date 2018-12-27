@@ -96,9 +96,15 @@
       document.addEventListener('keydown', onUploadOverlayKeydown);
       hashtagsInput.addEventListener('focus', function () {
         document.removeEventListener('keydown', onUploadOverlayKeydown);
+        hashtagsInput.addEventListener('blur', function () {
+          document.addEventListener('keydown', onUploadOverlayKeydown);
+        });
       });
       comments.addEventListener('focus', function () {
         document.removeEventListener('keydown', onUploadOverlayKeydown);
+        hashtagsInput.addEventListener('blur', function () {
+          document.addEventListener('keydown', onUploadOverlayKeydown);
+        });
       });
     });
     uploadCancel.addEventListener('click', function () {

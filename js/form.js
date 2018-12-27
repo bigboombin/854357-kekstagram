@@ -8,8 +8,6 @@
   hashtagsInput.addEventListener('change', function () {
     hashtagsInput.setCustomValidity('');
     hashtagsInput.style = '';
-    comments.setCustomValidity('');
-    comments.style = '';
     var hashtagsInputStr = hashtagsInput.value;
     var newHashtags = hashtagsInputStr.toLowerCase();
     hashtagsInput.value = newHashtags;
@@ -45,6 +43,8 @@
     }
   });
   comments.addEventListener('change', function () {
+    comments.setCustomValidity('');
+    comments.style = '';
     var commentsLetter = comments.value;
     if (commentsLetter.length > MAX_COMMENT) {
       comments.setCustomValidity('длина комментария не может составлять больше 140 символов');
