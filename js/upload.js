@@ -100,8 +100,8 @@
           form.reset();
           imgUploadOverlay.classList.add('hidden');
           resetForm();
+          document.removeEventListener('keydown', onUploadOverlayKeydown);
         }
-        document.removeEventListener('keydown', onUploadOverlayKeydown);
       };
       document.addEventListener('keydown', onUploadOverlayKeydown);
       hashtagsInput.addEventListener('focus', function () {
