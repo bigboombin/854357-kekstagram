@@ -4,6 +4,7 @@
   var ENTER = 13;
   var COMMENTS_COUNT = 5;
   var NEW_PHOTOS_COUNT = 10;
+  var bigPicture = document.querySelector('.big-picture');
   var mixArray = function (arr) {
     var j; var temp;
     for (var i = arr.length - 1; i > 0; i--) {
@@ -36,7 +37,6 @@
 
   var addBigPicture = function (photoDescription) {
 
-    var bigPicture = document.querySelector('.big-picture');
     var buttonClose = document.querySelector('#picture-cancel');
     var fragmentBigPicture = document.createDocumentFragment();
     fragmentBigPicture.appendChild(bigPicture);
@@ -89,6 +89,13 @@
         if (evt.keyCode === ENTER) {
           addBigPicture(photoDescription);
         }
+        var onDocumentKeydown = function () {
+          if (evt.keyCode === ESC) {
+            bigPicture.classList.add('hidden');
+          }
+          document.removeEventListener('keydown', onDocumentKeydown);
+        };
+        document.addEventListener('keydown', onDocumentKeydown);
       };
     };
     for (var i = 0; i < photosDescription.length; i++) {
