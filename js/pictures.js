@@ -75,7 +75,7 @@
     };
     commentCreate(photoDescription.comments.slice(0, COMMENTS_COUNT));
     var commentsCount = document.querySelectorAll('.social__comment').length;
-    bigPicture.querySelector('.social__comment-count').childNodes[0].textContent = Math.min(5, commentsCount) + ' из ';
+    bigPicture.querySelector('.social__comment-count').childNodes[0].textContent = Math.min(COMMENTS_COUNT, commentsCount) + ' из ';
 
 
   };
