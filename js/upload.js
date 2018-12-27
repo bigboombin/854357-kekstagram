@@ -20,6 +20,8 @@
   var slider = document.querySelector('.img-upload__effect-level');
   var scaleControlValue = document.querySelector('.scale__control--value');
   var inputNoneEffect = document.querySelector('#effect-none');
+  var scaleControl = MAX_EFFECT;
+  var uploadPreview = document.querySelector('.img-upload__preview');
 
   var changeEffectSlider = function () {
     slider.style.display = '';
@@ -29,7 +31,6 @@
   };
 
   var reset = function () {
-    inputNoneEffect.setAttribute('checked', true);
     imgUploadOverlay.classList.add('hidden');
     imgUploadPreview.classList.value = '';
     imgUploadPreview.style = '';
@@ -39,26 +40,29 @@
     uploadFile.value = '';
     effectLevelPin.style.left = MAX_EFFECT + '%';
     effectLevelDepth.style.width = MAX_EFFECT + '%';
+    scaleControlValue.setAttribute('value', MAX_EFFECT + '%');
+    uploadPreview.style = 'transform: scale(' + MAX_EFFECT / PERCENT + ')';
+    scaleControl = MAX_EFFECT;
+    inputNoneEffect.setAttribute('checked', 'true');
   };
 
   var closeUploadFile = function () {
-    inputNoneEffect.setAttribute('checked', true);
-    var scaleControl = MAX_EFFECT;
+    inputNoneEffect.setAttribute('checked', 'true');
     scaleControlValue.value = scaleControl + '%';
-    imgUploadPreview.style = 'transform: scale(' + scaleControl / PERCENT + ')';
+    uploadPreview.style = 'transform: scale(' + scaleControl / PERCENT + ')';
 
     var onScaleControlSmallerClick = function () {
       if (scaleControl > MIN_EFFECT) {
         scaleControl = scaleControl - MIN_EFFECT;
         scaleControlValue.value = scaleControl + '%';
-        imgUploadPreview.style = 'transform: scale(' + scaleControl / PERCENT + ')';
+        uploadPreview.style = 'transform: scale(' + scaleControl / PERCENT + ')';
       }
     };
     var onScaleControlBiggerClick = function () {
       if (scaleControl < MAX_EFFECT) {
         scaleControl = scaleControl + MIN_EFFECT;
         scaleControlValue.value = scaleControl + '%';
-        imgUploadPreview.style = 'transform: scale(' + scaleControl / PERCENT + ')';
+        uploadPreview.style = 'transform: scale(' + scaleControl / PERCENT + ')';
       }
     };
     scaleControlSmaller.addEventListener('click', onScaleControlSmallerClick);
@@ -83,8 +87,8 @@
       });
     });
     uploadCancel.addEventListener('click', function () {
-      imgUploadOverlay.classList.add('hidden');
       reset();
+      imgUploadOverlay.classList.add('hidden');
     });
   };
   closeUploadFile();
@@ -148,6 +152,7 @@
     });
   };
   var onError = function () {
+    reset();
     var template = document.querySelector('#error').content;
     var element = template.cloneNode(true);
     var main = document.querySelector('main');
@@ -161,17 +166,14 @@
     });
     anotherFileButton.addEventListener('click', function () {
       sectionError.remove();
-      reset();
     });
     document.addEventListener('keydown', function (evt) {
       if (evt.keyCode === ESC) {
         sectionError.remove();
-        reset();
       }
     });
     document.addEventListener('click', function () {
       sectionError.remove();
-      reset();
     });
   };
   form.addEventListener('submit', function (evt) {
