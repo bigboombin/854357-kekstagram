@@ -44,6 +44,10 @@
     uploadPreview.style = 'transform: scale(' + MAX_EFFECT / PERCENT + ')';
     scaleControl = MAX_EFFECT;
     inputNoneEffect.checked = 'true';
+    hashtagsInput.setCustomValidity('');
+    hashtagsInput.style = '';
+    comments.setCustomValidity('');
+    comments.style = '';
   };
   var resetClose = function () {
     imgUploadOverlay.classList.add('hidden');
@@ -59,6 +63,10 @@
     uploadPreview.style = 'transform: scale(' + MAX_EFFECT / PERCENT + ')';
     scaleControl = MAX_EFFECT;
     inputNoneEffect.setAttribute('checked', 'true');
+    hashtagsInput.setCustomValidity('');
+    hashtagsInput.style = '';
+    comments.setCustomValidity('');
+    comments.style = '';
   };
 
   var closeUploadFile = function () {
@@ -102,7 +110,7 @@
       });
       comments.addEventListener('focus', function () {
         document.removeEventListener('keydown', onUploadOverlayKeydown);
-        hashtagsInput.addEventListener('blur', function () {
+        comments.addEventListener('blur', function () {
           document.addEventListener('keydown', onUploadOverlayKeydown);
         });
       });
